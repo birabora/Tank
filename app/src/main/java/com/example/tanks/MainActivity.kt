@@ -45,8 +45,7 @@ class MainActivity : AppCompatActivity() {
                }
 
        }
-
-           (R.id.picture).removeView.(R.id.myTanks)
-           (R.id.picture).addView.(R.id.myTanks)
-    }
+           R.id.picture.removeView.myTanks
+           R.id.picture.addView.myTanks
+       }
    }
