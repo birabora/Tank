@@ -7,11 +7,12 @@ import android.view.KeyEvent
 import android.view.KeyEvent.*
 import android.widget.FrameLayout
 import android.widget.ImageView
-
-
+import kotlinx.android.synthetic.main.activity_main.*
 
 
 class MainActivity : AppCompatActivity() {
+
+    var step = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -29,23 +30,24 @@ class MainActivity : AppCompatActivity() {
        private fun move(derection: Derection) {
         when (derection) {
            Derection.UP-> {
-               findViewById<ImageView>(R.id.myTanks).rotation =0f
-               (findViewById<ImageView>(R.id.myTanks).layoutParams as FrameLayout.LayoutParams).topMargin  += -50
+               myTanks.rotation =0f
+               (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += -step
             }
                Derection.DOWN -> {
-                   findViewById<ImageView>(R.id.myTanks).rotation =180f
-                   (findViewById<ImageView>(R.id.myTanks).layoutParams as FrameLayout.LayoutParams).topMargin  += 50
+                  myTanks.rotation =180f
+                   (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += step
                }
-              Derection.RIGHT -> {findViewById<ImageView>(R.id.myTanks).rotation =90f
-                  (findViewById<ImageView>(R.id.myTanks).layoutParams as FrameLayout.LayoutParams).topMargin  += 50
+              Derection.RIGHT -> {
+                  myTanks.rotation =90f
+                  (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin  += step
               }
                   Derection.LEFT -> {
-                      findViewById<ImageView>(R.id.myTanks).rotation =270f
-                      (findViewById<ImageView>(R.id.myTanks).layoutParams as FrameLayout.LayoutParams).topMargin  -= 50
+                      myTanks.rotation =270f
+                      (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin  -= step
                }
 
        }
-           R.id.picture.removeView.myTanks
-           R.id.picture.addView.myTanks
+           picture.removeView(myTanks)
+           picture.addView(myTanks)
        }
    }

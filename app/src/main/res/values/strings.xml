@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Tanks</string>
+    <string name="settings">menu</string>
 </resources>
