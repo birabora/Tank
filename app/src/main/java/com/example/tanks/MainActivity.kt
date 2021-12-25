@@ -10,8 +10,10 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
+import drawers.ElementsDrawers
 import drawers.GridDrawble
 import enums.Derection
+import enums.Material
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val CELL_SIZE = 50
@@ -24,17 +26,29 @@ class MainActivity : AppCompatActivity() {
 
 
       private val GibtDrawble by lazy {
-          GridDrawble(this)
+          GridDrawble(picture)
       }
+private val elementsDrawers by lazy {
+    ElementsDrawers(picture)
+}
+
+
+
     var step = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
             picture.layoutParams = FrameLayout.LayoutParams(VERTICAL_MAX_SIZE, HORIZONTAL_MAX_SIZE)
+        editor_clea.setOnClickListener{elementsDrawers.currentMaterial = Material.EMPTY}
+        editor_bricks.setOnClickListener{elementsDrawers.currentMaterial = Material.BRICK}
+        editor_concrete.setOnClickListener{elementsDrawers.currentMaterial = Material.CONCRETE}
+        editor_grass.setOnClickListener{elementsDrawers.currentMaterial = Material.GRASS}
 
+}
     }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
         menuInflater.inflate(R.menu.settings, menu)
         return true
     }
