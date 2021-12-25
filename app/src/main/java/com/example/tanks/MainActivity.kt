@@ -10,9 +10,12 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
+import drawers.ElementsDrawers
 import drawers.GridDrawble
 import enums.Derection
+import enums.Material
 import kotlinx.android.synthetic.main.activity_main.*
+import models.Coordinate
 
 const val CELL_SIZE = 50
 const val VERTICAL_CELL_AMOUNT = 38
@@ -23,23 +26,38 @@ class MainActivity : AppCompatActivity() {
     private var editMode = false
 
 
-      private val GibtDrawble by lazy {
-          GridDrawble(this)
+      private val GridDrawble by lazy {
+          GridDrawble(picture)
       }
+private val elementsDrawers by lazy {
+    ElementsDrawers(picture)
+}
+
+
+
     var step = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
             picture.layoutParams = FrameLayout.LayoutParams(VERTICAL_MAX_SIZE, HORIZONTAL_MAX_SIZE)
+        editor_clea.setOnClickListener{elementsDrawers.currentMaterial = Material.EMPTY}
+        editor_bricks.setOnClickListener{elementsDrawers.currentMaterial = Material.BRICK}
+        editor_concrete.setOnClickListener{elementsDrawers.currentMaterial = Material.CONCRETE}
+        editor_grass.setOnClickListener{elementsDrawers.currentMaterial = Material.GRASS}
+        picture.setOnTouchListener { v, motionEvent ->
+            elementsDrawers.onTouchPicture( motionEvent.x,motionEvent.y)
+            return@setOnTouchListener true
+        }
+}
 
-    }
 
-    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+override fun onCreateOptionsMenu(menu: Menu): Boolean {
+
         menuInflater.inflate(R.menu.settings, menu)
         return true
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+         override fun onOptionsItemSelected(item: MenuItem): Boolean {
          return when(item.itemId){
          R.id.menu_settings -> {
              switcheditMode()
@@ -51,15 +69,15 @@ class MainActivity : AppCompatActivity() {
     }
     private fun switcheditMode () {
         if (editMode){
-            GibtDrawble.removeGrid()
+            GridDrawble.removeGrid()
             material_picture.visibility = GONE
 
-        } else{
-            GibtDrawble.drawGrid()
+        } else{ }
+            GridDrawble.drawGrib()
             material_picture.visibility = VISIBLE
-        }
         editMode = !editMode
     }
+
 
 
 
@@ -79,6 +97,7 @@ class MainActivity : AppCompatActivity() {
                myTanks.rotation =0f
 
                if (layoutParams.topMargin>0) {
+
                    (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += -CELL_SIZE
            }
             }
