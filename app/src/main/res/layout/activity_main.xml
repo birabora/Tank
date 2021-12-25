@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/teal_700">
+
+<FrameLayout
     android:id="@+id/picture"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700"
     tools:context=".MainActivity"
-
     >
 
     <ImageView
         android:id="@+id/myTanks"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="@dimen/cell_size"
+        android:layout_height="@dimen/cell_size"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.236"
@@ -22,5 +25,48 @@
         app:layout_constraintVertical_bias="0.247"
         app:srcCompat="@drawable/tank2" />
 
-</FrameLayout>
+    <LinearLayout
+        android:id="@+id/material_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible"
+
+        >
+
+        <ImageView
+            android:id="@+id/editor_clea"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:src="@drawable/ic_clea" />
+
+        <ImageView
+            android:id="@+id/editor_bricks"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:src="@drawable/kirpiz" />
+
+        <ImageView
+            android:id="@+id/editor_grass"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:src="@drawable/grass" />
+
+        <ImageView
+            android:id="@+id/editor_concrete"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:src="@drawable/obsidian" />
+
+
+    </LinearLayout>
+     </FrameLayout>
+    </FrameLayout>
 

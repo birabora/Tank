@@ -11,15 +11,24 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
 
-
+const val CELL_SIZE = 50
+const val VERTICAL_CELL_AMOUNT = 38
+const val HORIZONTAL_CELL_AMOUNT = 25
+const val VERTICAL_MAX_SIZE =  CELL_SIZE * VERTICAL_CELL_AMOUNT
+const val HORIZONTAL_MAX_SIZE = CELL_SIZE * HORIZONTAL_CELL_AMOUNT
 class MainActivity : AppCompatActivity() {
-      private val gridDrawble by lazy {
-          gridDrawble(context: this)
+    private var editMode = false
+
+
+      private val GibtDrawble by lazy {
+          GibtDrawble(this)
       }
     var step = 100
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+            picture.layoutParams = FrameLayout.LayoutParams(VERTICAL_MAX_SIZE, HORIZONTAL_MAX_SIZE)
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -30,14 +39,22 @@ class MainActivity : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
          return when(item.itemId){
          R.id.menu_settings -> {
-             gridDrawble.drawGrid()
+             switcheditMode()
              return true
          }
          else -> super.onOptionsItemSelected(item)
          }
 
     }
+    private fun switcheditMode () {
+        if (editMode){
+            GibtDrawble.removeGrid()
 
+        } else{
+            GibtDrawble.drawGrid()
+        }
+        editMode = !editMode
+    }
 
 
 
@@ -51,22 +68,32 @@ class MainActivity : AppCompatActivity() {
         return super.onKeyDown(keyCode, event)
     }
        private fun move(derection: Derection) {
+           val layoutParams = myTanks.layoutParams as FrameLayout.LayoutParams
         when (derection) {
            Derection.UP-> {
                myTanks.rotation =0f
-               (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += -step
+
+               if (layoutParams.topMargin>0) {
+                   (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += -CELL_SIZE
+           }
             }
                Derection.DOWN -> {
-                  myTanks.rotation =180f
-                   (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += step
+                   myTanks.rotation =180f
+                   if (layoutParams.topMargin + myTanks.height < HORIZONTAL_MAX_SIZE) {
+                       (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE
+                   }
                }
               Derection.RIGHT -> {
                    myTanks.rotation=90f
-                  (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin  += step
+                  if (layoutParams.leftMargin + myTanks.width < VERTICAL_MAX_SIZE) {
+                      (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE
+                  }
               }
                   Derection.LEFT -> {
                       myTanks.rotation =270f
-                      (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin  -= step
+                      if (layoutParams.leftMargin>0) {
+                          (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE
+                      }
                }
 
        }
