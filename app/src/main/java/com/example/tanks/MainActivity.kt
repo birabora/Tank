@@ -7,6 +7,8 @@ import android.view.KeyEvent
 import android.view.KeyEvent.*
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import android.widget.ImageView
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,9 +51,11 @@ class MainActivity : AppCompatActivity() {
     private fun switcheditMode () {
         if (editMode){
             GibtDrawble.removeGrid()
+            material_picture.visibility = GONE
 
         } else{
             GibtDrawble.drawGrid()
+            material_picture.visibility = VISIBLE
         }
         editMode = !editMode
     }
