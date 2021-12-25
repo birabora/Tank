@@ -1,4 +1,4 @@
-package com.example.tanks
+package enums
 
   enum  class Derection {
       UP,

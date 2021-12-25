@@ -10,7 +10,8 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
-import android.widget.ImageView
+import drawers.GridDrawble
+import enums.Derection
 import kotlinx.android.synthetic.main.activity_main.*
 
 const val CELL_SIZE = 50
@@ -23,7 +24,7 @@ class MainActivity : AppCompatActivity() {
 
 
       private val GibtDrawble by lazy {
-          GibtDrawble(this)
+          GridDrawble(this)
       }
     var step = 100
     override fun onCreate(savedInstanceState: Bundle?) {

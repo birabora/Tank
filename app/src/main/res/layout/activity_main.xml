@@ -41,6 +41,7 @@ tools:visibility="visible"
     android:layout_width="@dimen/cell_size"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
+    android:padding="10dp"
     android:src="@drawable/ic_clea" />
 
 <ImageView
@@ -48,6 +49,7 @@ tools:visibility="visible"
     android:layout_width="@dimen/cell_size"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
+    android:padding="10dp"
     android:src="@drawable/kirpiz" />
 
 <ImageView
@@ -55,6 +57,7 @@ tools:visibility="visible"
     android:layout_width="@dimen/cell_size"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
+    android:padding="10dp"
     android:src="@drawable/grass" />
 
 <ImageView
@@ -62,6 +65,7 @@ tools:visibility="visible"
     android:layout_width="@dimen/cell_size"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
+    android:padding="10dp"
     android:src="@drawable/obsidian" />
 
 </LinearLayout>
