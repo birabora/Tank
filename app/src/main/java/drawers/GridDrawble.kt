@@ -1,20 +1,12 @@
 package drawers
 
-import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import com.example.tanks.CELL_SIZE
-import com.example.tanks.R
+import com.example.tanks.MainActivity
 
 class GridDrawble(private val picture: FrameLayout){
-    fun drawGrib(){
-
-        drawHorizontalLines(picture)
-        drawVerticalLines(picture)
-
-    }
-private val allLines = mutableListOf<View>()
-
+    private val allLines = mutableListOf<View>()
     fun removeGrid (){
 
         allLines.forEach {
@@ -23,10 +15,12 @@ private val allLines = mutableListOf<View>()
 
     }
 
+    fun drawGrid(){
+        drawHorizontalLines()
+        drawVerticalLines()
+    }
 
-
-
-    private fun drawHorizontalLines(picture: FrameLayout) {
+    private fun drawHorizontalLines() {
         var topMargins = 0
         while (topMargins <= picture.layoutParams.height) {
             val horizontalLine = View(picture.context)
@@ -40,7 +34,7 @@ private val allLines = mutableListOf<View>()
         }
     }
 
-    private fun drawVerticalLines(picture: FrameLayout) {
+    private fun drawVerticalLines() {
         var leftMargins = 0
         while (leftMargins <= picture.layoutParams.width) {
             val verticaLine = View(picture.context)

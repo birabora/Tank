@@ -21,9 +21,7 @@
         android:src="@drawable/tank2" />
 
 
-
-
-     </FrameLayout>
+</FrameLayout>
 <LinearLayout
 android:id="@+id/material_picture"
 android:layout_width="wrap_content"
@@ -50,7 +48,7 @@ tools:visibility="visible"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
     android:padding="10dp"
-    android:src="@drawable/kirpiz" />
+    android:src="@drawable/kirpizr" />
 
 <ImageView
     android:id="@+id/editor_grass"
@@ -66,7 +64,7 @@ tools:visibility="visible"
     android:layout_height="@dimen/cell_size"
     android:layout_margin="8dp"
     android:padding="10dp"
-    android:src="@drawable/obsidian" />
+    android:src="@drawable/obsidianr" />
 
 </LinearLayout>
 
