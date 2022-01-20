@@ -73,7 +73,7 @@ override fun onCreateOptionsMenu(menu: Menu): Boolean {
             material_picture.visibility = GONE
 
         } else{ }
-            GridDrawble.drawGrib()
+            GridDrawble.drawGrid()
             material_picture.visibility = VISIBLE
         editMode = !editMode
     }

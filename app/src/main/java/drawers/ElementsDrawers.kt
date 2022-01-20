@@ -31,8 +31,8 @@ class ElementsDrawers(val picture:FrameLayout) {
             Material.EMPTY -> {
 
             }
-            Material.BRICK -> view.setImageResource(R.drawable.kirpiz)
-            Material.CONCRETE -> view.setImageResource(R.drawable.obsidian)
+            Material.BRICK -> view.setImageResource(R.drawable.kirpizr)
+            Material.CONCRETE -> view.setImageResource(R.drawable.obsidianr)
             Material.GRASS -> view.setImageResource(R.drawable.grass)
 
 
