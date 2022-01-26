@@ -15,7 +15,6 @@ import drawers.GridDrawble
 import enums.Derection
 import enums.Material
 import kotlinx.android.synthetic.main.activity_main.*
-import models.Coordinate
 
 const val CELL_SIZE = 50
 const val VERTICAL_CELL_AMOUNT = 38
@@ -83,47 +82,14 @@ override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when(keyCode){
-            KEYCODE_DPAD_UP -> move(Derection.UP)
-             KEYCODE_DPAD_DOWN -> move(Derection.DOWN)
-            KEYCODE_DPAD_RIGHT -> move(Derection.RIGHT)
-            KEYCODE_DPAD_LEFT -> move(Derection.LEFT)
+            KEYCODE_DPAD_UP -> elementsDrawers.move(myTanks, Derection.UP)
+             KEYCODE_DPAD_DOWN ->elementsDrawers.move(myTanks, Derection.DOWN)
+            KEYCODE_DPAD_RIGHT -> elementsDrawers.move(myTanks, Derection.RIGHT)
+            KEYCODE_DPAD_LEFT ->elementsDrawers.move(myTanks, Derection.LEFT)
         }
         return super.onKeyDown(keyCode, event)
     }
-       private fun move(derection: Derection) {
-           val layoutParams = myTanks.layoutParams as FrameLayout.LayoutParams
-        when (derection) {
-           Derection.UP-> {
-               myTanks.rotation =0f
 
-               if (layoutParams.topMargin>0) {
-
-                   (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin  += -CELL_SIZE
-           }
-            }
-               Derection.DOWN -> {
-                   myTanks.rotation =180f
-                   if (layoutParams.topMargin + myTanks.height < HORIZONTAL_MAX_SIZE) {
-                       (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE
-                   }
-               }
-              Derection.RIGHT -> {
-                   myTanks.rotation=90f
-                  if (layoutParams.leftMargin + myTanks.width < VERTICAL_MAX_SIZE) {
-                      (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE
-                  }
-              }
-                  Derection.LEFT -> {
-                      myTanks.rotation =270f
-                      if (layoutParams.leftMargin>0) {
-                          (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE
-                      }
-               }
-
-       }
-           picture.removeView(myTanks)
-           picture.addView(myTanks)
-       }
    }
 
 
