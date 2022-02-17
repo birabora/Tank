@@ -9,12 +9,13 @@ import enums.Derection
 import models.Coordinate
 import models.Element
 
-class TankDrawer(val picture: FrameLayout) {
-    fun move(myTanks: View, derection: Derection, elementsOnPicture: List<Element>) {
+class TankDrawer(private val picture: FrameLayout) {
+
+    fun move(myTanks: View, direction: Derection, elementsOnPicture: List<Element>) {
         val layoutParams = myTanks.layoutParams as FrameLayout.LayoutParams
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.topMargin)
-        when (derection) {
-            Derection.UP -> {//я начал пересматривать 6 урок с нуля ок
+        when (direction) {
+            Derection.UP -> {
                 myTanks.rotation = 0f
                 (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin += -CELL_SIZE
             }
@@ -33,7 +34,7 @@ class TankDrawer(val picture: FrameLayout) {
         }
         val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin) //save after change
         if (checkTankCanMoveThroughBorder(nextCoordinate, myTanks)
-            && checkTankCanMoveThroughMaterial(nextCoordinate,)
+            && checkTankCanMoveThroughMaterial(nextCoordinate, elementsOnPicture)
         ) {
             picture.removeView(myTanks)
             picture.addView(myTanks, 0)
@@ -73,24 +74,9 @@ class TankDrawer(val picture: FrameLayout) {
     private fun getTankCoordinates(topLeftCoordinate: Coordinate): List<Coordinate> {
         val coordinateList = mutableListOf<Coordinate>()
         coordinateList.add(topLeftCoordinate)
-        coordinateList.add(
-            Coordinate(
-                topLeftCoordinate.top + CELL_SIZE,
-                topLeftCoordinate.left
-            )
-        ) //bottom_left
-        coordinateList.add(
-            Coordinate(
-                topLeftCoordinate.top,
-                topLeftCoordinate.left + CELL_SIZE
-            )
-        ) //top_right
-        coordinateList.add(
-            Coordinate(
-                topLeftCoordinate.top + CELL_SIZE,
-                topLeftCoordinate.left + CELL_SIZE
-            )
-        ) //bottom_right
+        coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left)) //bottom_left
+        coordinateList.add(Coordinate(topLeftCoordinate.top, topLeftCoordinate.left + CELL_SIZE)) //top_right
+        coordinateList.add(Coordinate(topLeftCoordinate.top + CELL_SIZE, topLeftCoordinate.left + CELL_SIZE)) //bottom_right
         return coordinateList
     }
 }

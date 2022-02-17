@@ -5,7 +5,7 @@ import android.widget.FrameLayout
 import com.example.tanks.CELL_SIZE
 import com.example.tanks.MainActivity
 
-class GridDrawble(private val picture: FrameLayout){
+class GridDrawer(private val picture: FrameLayout){
     private val allLines = mutableListOf<View>()
     fun removeGrid (){
 

@@ -1,4 +1,6 @@
 package drawers
 
-class BulletDrawer {
+import android.widget.FrameLayout
+
+class BulletDrawer(private val picture: FrameLayout) {
 }

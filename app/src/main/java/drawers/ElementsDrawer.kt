@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import models.Coordinate
 import models.Element
 
-class ElementsDrawers(val picture: FrameLayout) {
+class ElementsDrawer(val picture: FrameLayout) {
     var currentMaterial = Material.EMPTY
     val elementsOnPicture = mutableListOf<Element>()
 
