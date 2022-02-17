@@ -12,9 +12,11 @@ import android.view.View.VISIBLE
 import android.widget.FrameLayout
 import drawers.ElementsDrawers
 import drawers.GridDrawble
+import drawers.TankDrawer
 import enums.Derection
 import enums.Material
 import kotlinx.android.synthetic.main.activity_main.*
+import java.nio.file.Files.move
 
 const val CELL_SIZE = 50
 const val VERTICAL_CELL_AMOUNT = 38
@@ -28,10 +30,19 @@ class MainActivity : AppCompatActivity() {
       private val GridDrawble by lazy {
           GridDrawble(picture)
       }
+
+
+
 private val elementsDrawers by lazy {
     ElementsDrawers(picture)
 }
+    private val TankDrawble by lazy {
+        GridDrawble(picture)
+    }
 
+    private val BulletDrawble by lazy {
+        GridDrawble(picture)
+    }
 
 
     var step = 100
@@ -57,13 +68,13 @@ override fun onCreateOptionsMenu(menu: Menu): Boolean {
     }
 
          override fun onOptionsItemSelected(item: MenuItem): Boolean {
-         return when(item.itemId){
-         R.id.menu_settings -> {
-             switcheditMode()
-             return true
-         }
-         else -> super.onOptionsItemSelected(item)
-         }
+        return when(item.itemId){
+            R.id.menu_settings -> {
+                switcheditMode()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
 
     }
     private fun switcheditMode () {
@@ -82,10 +93,10 @@ override fun onCreateOptionsMenu(menu: Menu): Boolean {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when(keyCode){
-            KEYCODE_DPAD_UP -> elementsDrawers.move(myTanks, Derection.UP)
-             KEYCODE_DPAD_DOWN ->elementsDrawers.move(myTanks, Derection.DOWN)
-            KEYCODE_DPAD_RIGHT -> elementsDrawers.move(myTanks, Derection.RIGHT)
-            KEYCODE_DPAD_LEFT ->elementsDrawers.move(myTanks, Derection.LEFT)
+            KEYCODE_DPAD_UP -> TankDrawer.move(myTanks, Derection.UP,elementsDrawers.elementsOnPicture)
+             KEYCODE_DPAD_DOWN ->TankDrawer.move(myTanks, Derection.DOWN,elementsDrawers.elementsOnPicture)
+            KEYCODE_DPAD_RIGHT -> TankDrawer.move(myTanks, Derection.RIGHT,elementsDrawers.elementsOnPicture)
+            KEYCODE_DPAD_LEFT ->TankDrawer.move(myTanks, Derection.LEFT,elementsDrawers.elementsOnPicture)
         }
         return super.onKeyDown(keyCode, event)
     }

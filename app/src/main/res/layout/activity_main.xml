@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/teal_700">
+    android:background="@color/purple_700">
 
 <FrameLayout
     android:id="@+id/picture"
@@ -20,53 +20,53 @@
 
         android:src="@drawable/tank2" />
 
+    <LinearLayout
+        android:id="@+id/material_picture"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:layout_margin="8dp"
+        android:background="@color/green"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ImageView
+            android:id="@+id/editor_clea"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:src="@drawable/ic_clea" />
+
+        <ImageView
+            android:id="@+id/editor_bricks"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:src="@drawable/kirpizr" />
+
+        <ImageView
+            android:id="@+id/editor_grass"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:src="@drawable/grass" />
+
+        <ImageView
+            android:id="@+id/editor_concrete"
+            android:layout_width="@dimen/cell_size"
+            android:layout_height="@dimen/cell_size"
+            android:layout_margin="8dp"
+            android:padding="10dp"
+            android:src="@drawable/obsidianr" />
+
+    </LinearLayout>
+
 
 </FrameLayout>
-<LinearLayout
-android:id="@+id/material_picture"
-android:layout_width="wrap_content"
-android:layout_height="match_parent"
-android:layout_gravity="end"
-android:layout_margin="8dp"
-android:orientation="vertical"
-android:visibility="gone"
-tools:visibility="visible"
 
-    >
-
-<ImageView
-    android:id="@+id/editor_clea"
-    android:layout_width="@dimen/cell_size"
-    android:layout_height="@dimen/cell_size"
-    android:layout_margin="8dp"
-    android:padding="10dp"
-    android:src="@drawable/ic_clea" />
-
-<ImageView
-    android:id="@+id/editor_bricks"
-    android:layout_width="@dimen/cell_size"
-    android:layout_height="@dimen/cell_size"
-    android:layout_margin="8dp"
-    android:padding="10dp"
-    android:src="@drawable/kirpizr" />
-
-<ImageView
-    android:id="@+id/editor_grass"
-    android:layout_width="@dimen/cell_size"
-    android:layout_height="@dimen/cell_size"
-    android:layout_margin="8dp"
-    android:padding="10dp"
-    android:src="@drawable/grass" />
-
-<ImageView
-    android:id="@+id/editor_concrete"
-    android:layout_width="@dimen/cell_size"
-    android:layout_height="@dimen/cell_size"
-    android:layout_margin="8dp"
-    android:padding="10dp"
-    android:src="@drawable/obsidianr" />
-
-</LinearLayout>
-
-    </FrameLayout>
+</FrameLayout>
 

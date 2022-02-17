@@ -1,6 +1,6 @@
 package enums
 
-enum class Material(val tankCanGoThroudh:Boolean) {
+enum class Material(val tankCanGoThrough:Boolean) {
     EMPTY(true),
     BRICK(false),
     CONCRETE(false),
