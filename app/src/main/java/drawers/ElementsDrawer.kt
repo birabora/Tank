@@ -4,12 +4,8 @@ import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.example.tanks.CELL_SIZE
-import com.example.tanks.HORIZONTAL_MAX_SIZE
 import com.example.tanks.R
-import com.example.tanks.VERTICAL_MAX_SIZE
-import enums.Derection
 import enums.Material
-import kotlinx.android.synthetic.main.activity_main.*
 import models.Coordinate
 import models.Element
 

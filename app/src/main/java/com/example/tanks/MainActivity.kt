@@ -10,10 +10,11 @@ import android.view.MenuItem
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.widget.FrameLayout
+import drawers.BulletDrawer
 import drawers.ElementsDrawer
 import drawers.GridDrawer
 import drawers.TankDrawer
-import enums.Derection
+import enums.Direction
 import enums.Material
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -27,18 +28,18 @@ class MainActivity : AppCompatActivity() {
     private var editMode = false
 
 
-    private val GridDrawer by lazy {
+    private val gridDrawer by lazy {
         GridDrawer(picture)
     }
-    private val ElementsDrawer by lazy {
+    private val elementsDrawer by lazy {
         ElementsDrawer(picture)
     }
-    private val TankDrawer by lazy {
+    private val tankDrawer by lazy {
         TankDrawer(picture)
     }
-//    private val BulletDrawer by lazy {
-//        BulletDrawer(picture)
-//    }
+    private val bulletDrawer by lazy {
+       BulletDrawer(picture)
+   }
 
 
     var step = 100
@@ -46,12 +47,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         picture.layoutParams = FrameLayout.LayoutParams(VERTICAL_MAX_SIZE, HORIZONTAL_MAX_SIZE)
-        editor_clea.setOnClickListener { ElementsDrawer.currentMaterial = Material.EMPTY }
-        editor_bricks.setOnClickListener { ElementsDrawer.currentMaterial = Material.BRICK }
-        editor_concrete.setOnClickListener { ElementsDrawer.currentMaterial = Material.CONCRETE }
-        editor_grass.setOnClickListener { ElementsDrawer.currentMaterial = Material.GRASS }
+        editor_clea.setOnClickListener { elementsDrawer.currentMaterial = Material.EMPTY }
+        editor_bricks.setOnClickListener { elementsDrawer.currentMaterial = Material.BRICK }
+        editor_concrete.setOnClickListener { elementsDrawer.currentMaterial = Material.CONCRETE }
+        editor_grass.setOnClickListener { elementsDrawer.currentMaterial = Material.GRASS }
         picture.setOnTouchListener { v, motionEvent ->
-            ElementsDrawer.onTouchPicture(motionEvent.x, motionEvent.y)
+            elementsDrawer.onTouchPicture(motionEvent.x, motionEvent.y)
             return@setOnTouchListener true
         }
     }
@@ -76,12 +77,12 @@ class MainActivity : AppCompatActivity() {
 
     private fun switcheditMode() {
         if (editMode) {
-            GridDrawer.removeGrid()
+            gridDrawer.removeGrid()
             material_picture.visibility = GONE
 
         } else {
         }
-        GridDrawer.drawGrid()
+        gridDrawer.drawGrid()
         material_picture.visibility = VISIBLE
         editMode = !editMode
     }
@@ -89,10 +90,11 @@ class MainActivity : AppCompatActivity() {
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         when (keyCode) {
-            KEYCODE_DPAD_UP -> TankDrawer.move(myTanks, Derection.UP, ElementsDrawer.elementsOnPicture)
-            KEYCODE_DPAD_DOWN -> TankDrawer.move(myTanks, Derection.DOWN, ElementsDrawer.elementsOnPicture)
-            KEYCODE_DPAD_RIGHT -> TankDrawer.move(myTanks, Derection.RIGHT, ElementsDrawer.elementsOnPicture)
-            KEYCODE_DPAD_LEFT -> TankDrawer.move(myTanks, Derection.LEFT, ElementsDrawer.elementsOnPicture)
+            KEYCODE_DPAD_UP -> tankDrawer.move(myTanks, Direction.UP, elementsDrawer.elementsOnPicture)
+            KEYCODE_DPAD_DOWN -> tankDrawer.move(myTanks, Direction.DOWN, elementsDrawer.elementsOnPicture)
+            KEYCODE_DPAD_RIGHT -> tankDrawer.move(myTanks, Direction.RIGHT, elementsDrawer.elementsOnPicture)
+            KEYCODE_DPAD_LEFT -> tankDrawer.move(myTanks, Direction.LEFT, elementsDrawer.elementsOnPicture)
+            KEYCODE_SPACE -> bulletDrawer.drawBullet(myTanks,tankDrawer.currentDirection)
         }
         return super.onKeyDown(keyCode, event)
     }

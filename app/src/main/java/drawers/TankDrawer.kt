@@ -5,29 +5,31 @@ import android.widget.FrameLayout
 import com.example.tanks.CELL_SIZE
 import com.example.tanks.HORIZONTAL_MAX_SIZE
 import com.example.tanks.VERTICAL_MAX_SIZE
-import enums.Derection
+import enums.Direction
 import models.Coordinate
 import models.Element
 
 class TankDrawer(private val picture: FrameLayout) {
-
-    fun move(myTanks: View, direction: Derection, elementsOnPicture: List<Element>) {
+    var currentDirection = Direction.DOWN
+    fun move(myTanks: View, direction: Direction, elementsOnPicture: List<Element>) {
         val layoutParams = myTanks.layoutParams as FrameLayout.LayoutParams
         val currentCoordinate = Coordinate(layoutParams.topMargin, layoutParams.topMargin)
+        currentDirection = direction
+        myTanks.rotation = direction.rotation
         when (direction) {
-            Derection.UP -> {
+            Direction.UP -> {
                 myTanks.rotation = 0f
                 (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin += -CELL_SIZE
             }
-            Derection.DOWN -> {
+            Direction.DOWN -> {
                 myTanks.rotation = 180f
                 (myTanks.layoutParams as FrameLayout.LayoutParams).topMargin += CELL_SIZE
             }
-            Derection.RIGHT -> {
+            Direction.RIGHT -> {
                 myTanks.rotation = 90f
                 (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin += CELL_SIZE
             }
-            Derection.LEFT -> {
+            Direction.LEFT -> {
                 myTanks.rotation = 270f
                 (myTanks.layoutParams as FrameLayout.LayoutParams).leftMargin -= CELL_SIZE
             }
