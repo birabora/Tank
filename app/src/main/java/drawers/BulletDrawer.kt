@@ -1,5 +1,6 @@
 package drawers
 
+import android.app.Activity
 import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -7,13 +8,37 @@ import com.example.tanks.CELL_SIZE
 import com.example.tanks.R
 import enums.Direction
 import models.Coordinate
+import utils.checkViewCanMoveThroughBorder
 
 private const val BULLET_WIDTH = 15
 private const val BULLET_HEIGHT = 25
 
 class BulletDrawer(private val picture: FrameLayout) {
-    fun drawBullet(myTank: View, currentDirection: Direction){
-        val bullet = ImageView(picture.context)
+
+    fun makeBulletMove(myTank: View, currentDirection: Direction){
+        Thread(Runnable {
+            val bullet = createBullet(myTank, currentDirection)
+            while (bullet.checkViewCanMoveThroughBorder(Coordinate(bullet.top,bullet.left),myTank)){
+                when(currentDirection){
+                    Direction.UP -> (bullet.layoutParams as FrameLayout.LayoutParams).topMargin -= BULLET_HEIGHT
+                    Direction.DOWN -> (bullet.layoutParams as FrameLayout.LayoutParams).topMargin += BULLET_HEIGHT
+                    Direction.LEFT -> (bullet.layoutParams as FrameLayout.LayoutParams).leftMargin -= BULLET_HEIGHT
+                    Direction.RIGHT -> (bullet.layoutParams as FrameLayout.LayoutParams).leftMargin += BULLET_HEIGHT
+                }
+                Thread.sleep(30)
+                (picture.context as Activity).runOnUiThread {
+                    picture.removeView(bullet)
+                    picture.addView(bullet)
+                }
+            }
+            (picture.context as Activity).runOnUiThread {
+                picture.removeView(bullet)
+            }
+        }).start()
+    }
+
+    private fun createBullet(myTank: View, currentDirection: Direction) :ImageView{
+        return ImageView(picture.context)
             .apply {
                 this.setImageResource(R.drawable.bullet)
                 this.layoutParams = FrameLayout.LayoutParams(BULLET_WIDTH, BULLET_HEIGHT)
@@ -22,7 +47,6 @@ class BulletDrawer(private val picture: FrameLayout) {
                 (this.layoutParams as FrameLayout.LayoutParams).leftMargin = bulletCoordinate.left
                 this.rotation = currentDirection.rotation
             }
-        picture.addView(bullet)
     }
     private fun getBulletCoordinates(
         bullet:ImageView,
@@ -32,21 +56,21 @@ class BulletDrawer(private val picture: FrameLayout) {
         val tankLeftTopCoordinate = Coordinate(myTank.top, myTank.left)
         return when (currentDirection) {
             Direction.UP ->
-                return Coordinate(
+                Coordinate(
                     top = tankLeftTopCoordinate.top - bullet.layoutParams.height,
                     left = getDistanceToMiddleft0fTank(tankLeftTopCoordinate.left, bullet.layoutParams.width))
             Direction.DOWN ->
-                return Coordinate(
+                Coordinate(
                     top = tankLeftTopCoordinate.top - bullet.layoutParams.height,
                     left = getDistanceToMiddleft0fTank(tankLeftTopCoordinate.left, bullet.layoutParams.width ))
 
             Direction.LEFT ->
-                return Coordinate(
+                Coordinate(
                     top = getDistanceToMiddleft0fTank(tankLeftTopCoordinate.top, bullet.layoutParams.height ),
                     left = tankLeftTopCoordinate.left - bullet.layoutParams.width)
 
             Direction.RIGHT ->
-                return Coordinate(
+                Coordinate(
                     top = getDistanceToMiddleft0fTank(tankLeftTopCoordinate.top, bullet.layoutParams.height ),
                     left = tankLeftTopCoordinate.left + myTank.layoutParams.width)
 

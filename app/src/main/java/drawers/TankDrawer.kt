@@ -8,6 +8,9 @@ import com.example.tanks.VERTICAL_MAX_SIZE
 import enums.Direction
 import models.Coordinate
 import models.Element
+import utils.checkViewCanMoveThroughBorder
+
+
 
 class TankDrawer(private val picture: FrameLayout) {
     var currentDirection = Direction.DOWN
@@ -35,7 +38,7 @@ class TankDrawer(private val picture: FrameLayout) {
             }
         }
         val nextCoordinate = Coordinate(layoutParams.topMargin, layoutParams.leftMargin) //save after change
-        if (checkTankCanMoveThroughBorder(nextCoordinate, myTanks)
+        if (myTanks.checkViewCanMoveThroughBorder(nextCoordinate, myTanks)
             && checkTankCanMoveThroughMaterial(nextCoordinate, elementsOnPicture)
         ) {
             picture.removeView(myTanks)
